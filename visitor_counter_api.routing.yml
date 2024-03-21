@@ -1,0 +1,8 @@
+visitor_counter_api.json_api:
+  path: '/api/get-stats'
+  defaults:
+    _controller: 'Drupal\visitor_counter_api\Controller\VisitorCounterController::index'
+    _title: 'JSON api'
+  methods:  [POST, GET]
+  requirements:
+    _access: 'TRUE'
