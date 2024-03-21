@@ -1,0 +1,5 @@
+name: 'Visitor Counter API'
+description: 'A simple JSON API for counting number of visitors of a website'
+core: 10.x
+core_version_requirement: ^9.3 || ^10
+type: module
