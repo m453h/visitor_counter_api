@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * Implement hook_schema().
+ */
+function visitor_counter_api_schema(): array {
+  $schema['visitor_counter_logs'] = [
+    'description' => 'Contains website visitor details',
+    'fields' => [
+      'id' => [
+        'description' => 'Holds the id',
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+      ],
+      'client_fingerprint' => [
+        'description' => 'The unique ID of the client',
+        'type' => 'varchar',
+        'length' => 200,
+        'not null' => TRUE,
+      ],
+      'user_agent' => [
+        'description' => 'User agent string',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'browser' => [
+        'description' => 'Name of the browser',
+        'type' => 'varchar',
+        'length' => 200,
+        'not null' => TRUE,
+      ],
+      'ip_address' => [
+        'description' => 'Client IP Address',
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => TRUE,
+      ],
+      'first_visit_time' => [
+        'description' => 'Date the log was submitted',
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => TRUE,
+      ],
+      'is_complete' => [
+        'description' => 'Shows that the user has gracefully exited',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => FALSE,
+      ],
+      'last_visit_time' => [
+        'description' => 'Date the log was submitted',
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+
+  return $schema;
+}
