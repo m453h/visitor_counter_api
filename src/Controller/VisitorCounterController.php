@@ -61,6 +61,7 @@ class VisitorCounterController {
       'today'=>$this->getTodayVisitors(),
       'yesterday'=>$this->getYesterdayVisitors(),
       'week'=>$this->getThisWeekVisitors(),
+      'month'=>$this->getThisMonthVisitors(),
       'overall'=>$this->getOverallVisitors()
     ];
   }
@@ -97,6 +98,16 @@ class VisitorCounterController {
       'SELECT COUNT(DISTINCT(client_fingerprint)) as total
               FROM visitor_counter_logs vcl
               WHERE YEARWEEK(vcl.last_visit_time) = YEARWEEK(CURRENT_DATE());')
+      ->fetchAssoc();
+    return number_format($result['total']);
+  }
+
+  public function getThisMonthVisitors(): string {
+    $result = Drupal::database()->query(
+      'SELECT COUNT(DISTINCT(client_fingerprint)) as total
+              FROM visitor_counter_logs vcl
+              WHERE YEAR(vcl.last_visit_time) = YEAR(CURRENT_DATE())
+              AND MONTH(vcl.last_visit_time) = MONTH(CURRENT_DATE());')
       ->fetchAssoc();
     return number_format($result['total']);
   }
